@@ -18,5 +18,6 @@ module RailsSample
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
   end
 end
