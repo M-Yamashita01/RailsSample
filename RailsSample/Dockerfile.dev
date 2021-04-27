@@ -1,11 +1,12 @@
 FROM ruby:3.0.0
 
 # RUN   apt-get install -y build-base \
-RUN   apt-get update && apt-get install -y default-mysql-client \
-                       curl \
-                       bash \
-                       nodejs \
-                       tzdata
+RUN   apt-get update && \
+      apt-get install -y bash \
+                         curl \
+                         default-mysql-client \
+                         nodejs \
+                         tzdata
 
 WORKDIR /app
 
