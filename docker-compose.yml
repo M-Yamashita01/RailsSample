@@ -12,7 +12,7 @@ services:
 
   rails:
     build:
-      context: ./RailsSample6
+      context: ./RailsSample4
       dockerfile: Dockerfile.alpine
     environment: 
       DATABASE_NAME: sampledb
@@ -20,7 +20,7 @@ services:
       DB_PASSWORD: mysql_user
       DB_HOSTNAME: mysql
     volumes:
-      - ./RailsSample6:/app
+      - ./RailsSample4:/app
     ports:
       - '3000:3000'
     depends_on:

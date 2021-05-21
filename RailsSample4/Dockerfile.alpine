@@ -1,0 +1,17 @@
+FROM ruby:2.4.10-alpine3.11
+
+RUN apk update && \
+    apk --no-cache add bash \
+                       build-base \
+                       curl \
+                       mysql-dev \
+                       nodejs \
+                       tzdata
+
+WORKDIR /app
+
+COPY . ./
+
+RUN gem install bundler:1.7.13 && bundle install
+
+CMD bundle exec rails s -p 3000 -b '0.0.0.0'
