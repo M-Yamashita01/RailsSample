@@ -74,4 +74,7 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  # SQLログ表示
+  # ActiveRecord::Base.logger = Logger.new(STDOUT)
 end

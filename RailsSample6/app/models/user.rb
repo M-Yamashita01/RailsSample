@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  @@thread_1_updated = true
+  @@thread_2_inserted = true
+
   def run_thread
     threads = []
     threads.push(t1_thread)
@@ -15,8 +18,14 @@ class User < ApplicationRecord
         User.where(id: 0).update(name: 'baz')
         puts 'Thread1 finished update record'
 
+        @@thread_1_updated = true
+
+        until @@thread_2_inserted do
+          
+        end
+
         puts 'Thread1 started insert record'
-        for num in 1..100 do
+        for num in 1..2 do
           new_user = User.new
           new_user.name = 'hoge'
           new_user.email = 'hoge@example.com'
@@ -35,14 +44,21 @@ class User < ApplicationRecord
         User.where(id: 1).update(name: 'test')
         puts 'Thread2 finished update record'
 
+        until @@thread_1_updated do
+          
+        end
+
         puts 'Thread2 started insert record'
-        for num in 1..100 do
+        for num in 1..2 do
           new_user = User.new
           new_user.name = 'sample'
           new_user.email = 'sample@example.com'
           new_user.save!
           puts 'Thread2 inserted record'
         end
+
+        @@thread_2_inserted = true
+
       end
     end
   end
