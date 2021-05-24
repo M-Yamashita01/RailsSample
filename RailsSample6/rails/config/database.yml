@@ -9,7 +9,7 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: mysql_user
   password: mysql_user
-  host: mysql
+  host: mysql_for_rails6
   database: sampledb
   socket: /tmp/mysql.sock
   timeout: 5000
