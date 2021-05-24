@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    volumes:
+    - ./db/data:/var/lib/mysql
+    ports:
+    - 3306:3306
+
+  rails:
+    build:
+      context: ./rails
+      dockerfile: Dockerfile.alpine
+    environment: 
+      DATABASE_NAME: sampledb
+      DB_USERNAME: mysql_user
+      DB_PASSWORD: mysql_user
+      DB_HOSTNAME: mysql
+    volumes:
+      - ./rails:/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mysql
