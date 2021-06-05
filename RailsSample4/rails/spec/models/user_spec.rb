@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'テスト' do
+    # let(:user) { create(:user) }
     before do
       # create_list(:user, 10)
       create(:user)
@@ -10,8 +11,9 @@ RSpec.describe User, type: :model do
       # User.create(name: 'bar', email: 'bar@example.com')
     end
     it '正常系' do
-      sleep 10
-      # described_class.new.run_thread
+      puts 'User count in spec'
+      puts User.count
+      described_class.new.run_thread
     end
   end
 end

@@ -1,11 +1,11 @@
 class User < ActiveRecord::Base
 
-  @@thread_1_updated = false
-  @@thread_2_updated = false
-
   def run_thread
+    puts 'Records count before thread'
+    puts User.count
+
     threads = []
-    threads.push(t1_thread)
+    # threads.push(t1_thread)
     threads.push(t2_thread)
 
     threads.each {|t| t.value}
@@ -32,22 +32,28 @@ class User < ActiveRecord::Base
   end
 
   def t2_thread
-    Thread.new do
-      ActiveRecord::Base.transaction do
-        puts 'Thread2 started update record'
-        User.where(id: 1).update_all(name: 'test')
-        puts 'Thread2 finished update record'
+    puts 'User.count before thread'
+    puts User.count
+    puts 'ActiveRecord::Base.connection.open_transactions'
+    puts ActiveRecord::Base.connection.open_transactions
+    puts ActiveRecord::Base.connection_pool.connections.size
+    
+    thread = Thread.new do
+      puts 'User.count in thread.'
+      puts User.count
+      puts 'ActiveRecord::Base.connection.open_transactions'
+      puts ActiveRecord::Base.connection.open_transactions
+      puts 'ActiveRecord::Base.connection_pool.connections.size'
+      puts ActiveRecord::Base.connection_pool.connections.size
 
-        puts 'Thread2 started insert record'
-        for num in 1..2 do
-          new_user = User.new
-          new_user.name = 'sample'
-          new_user.email = 'sample@example.com'
-          new_user.save!
-          puts 'Thread2 inserted record'
-        end
+      ActiveRecord::Base.transaction do
+        puts 'User.count in transaction'
+        puts User.count
+        puts 'ActiveRecord::Base.connection.open_transactions'
+        puts ActiveRecord::Base.connection.open_transactions
       end
-      puts 'Thread2 commit'
     end
+
+    thread
   end
 end
