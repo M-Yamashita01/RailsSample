@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
     puts User.count
 
     threads = []
-    # threads.push(t1_thread)
     threads.push(t2_thread)
 
     threads.each {|t| t.value}
@@ -15,7 +14,6 @@ class User < ActiveRecord::Base
     Thread.new do
       ActiveRecord::Base.transaction do
         puts 'Thread1 started update record'
-        # User.where(id: 0).update_all(name: 'baz')
         puts 'Thread1 finished update record'
 
         puts 'Thread1 started insert record'
@@ -36,8 +34,9 @@ class User < ActiveRecord::Base
     puts User.count
     puts 'ActiveRecord::Base.connection.open_transactions'
     puts ActiveRecord::Base.connection.open_transactions
+    puts 'ActiveRecord::Base.connection_pool.connections.size'
     puts ActiveRecord::Base.connection_pool.connections.size
-    
+
     thread = Thread.new do
       puts 'User.count in thread.'
       puts User.count
