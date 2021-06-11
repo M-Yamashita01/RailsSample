@@ -71,12 +71,10 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
-    puts 'DatabaseCleaner.start'
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
-    puts 'DatabaseCleaner.clean'
   end
 
   # SQLログ表示
