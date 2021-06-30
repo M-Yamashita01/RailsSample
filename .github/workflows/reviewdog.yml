@@ -22,8 +22,8 @@ jobs:
       - name: rubocop
         uses: reviewdog/action-rubocop@v1
         with:
-          rubocop_version: 1.11.0
+          rubocop_version: 1.13.0
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          rubocop_flags: RailsSample4/
+          rubocop_flags: --config RailsSample4/rails/.rubocop.yml RailsSample4/rails/
           rubocop_extensions: meowcop
           reporter: github-pr-check
