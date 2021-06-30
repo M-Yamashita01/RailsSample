@@ -28,5 +28,4 @@ jobs:
           rubocop_version: 1.13.0
           github_token: ${{ secrets.GITHUB_TOKEN }}
           rubocop_flags: --config RailsSample4/rails/.rubocop.yml RailsSample4/rails/
-          rubocop_extensions: meowcop
-          reporter: github-pr-check
+          reporter: github-pr-review
