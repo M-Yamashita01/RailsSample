@@ -40,6 +40,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'pry-byebug'
   gem 'spring-commands-rspec'
+  gem 'rubocop', '1.13'
 end
 
 group :development do
