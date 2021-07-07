@@ -1,29 +1,20 @@
 class User < ActiveRecord::Base
 
-  class_attribute :scopes_, :instance_writer => false
-  self.scopes_ = {}
+  def sample_method
+    if !a_condition
+      # comment
+      flag = false
+      do_a
+    end
 
-  def self.named_scope(name, options={}, &block)
-    scope(name, options, &block)
-    self.scopes_[self.to_s] ||= {}
-    self.scopes_[self.to_s][name] = Proc.new do |*args|
-      cls = args.shift
-      if cls.respond_to?(name)
-        cls.send(name, *args)
-      end
+    if !another_condition
+      # comment
+      flag = false
+      do_b
+    else
+      do_c
     end
   end
-
-  named_scope :test, (lambda do |*args|
-    test_flag = false
-    sample = Sample::Hoge.new
-    if !sample.is_true?
-      test_flag = true
-      puts "test_flag is #{test_flag}"
-    else
-      puts 'test_flag is still false'
-    end
-  end)
 
   def run_thread
     threads = []
