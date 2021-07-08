@@ -1,16 +1,14 @@
 class User < ActiveRecord::Base
 
   def sample_method
-    if !a_condition
-      # comment
-      flag = false
-      do_a
-    end
+    sample_hoge = Sample::Hoge.new
 
-    if !another_condition
+    # outer comment
+    do_a
+
+    if !condition
       # comment
-      flag = false
-      do_b
+      do_a
     else
       do_c
     end
