@@ -1,16 +1,16 @@
 version: '3'
 
 services:
-  mysql:
+  mysql_for_rails4:
     build:
       context: ./db
       dockerfile: Dockerfile
     volumes:
-      - ./db/data:/var/lib/mysql
+      - mysql_for_rails4-data:/var/lib/mysql
     ports:
       - 3306:3306
 
-  rails:
+  rails4:
     build:
       context: ./rails
       dockerfile: Dockerfile.alpine
@@ -19,4 +19,8 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - mysql
+      - mysql_for_rails4
+
+volumes:
+  mysql_for_rails4-data:
+    driver: local

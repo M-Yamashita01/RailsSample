@@ -6,9 +6,10 @@ services:
       context: ./db
       dockerfile: Dockerfile
     volumes:
-    - ./db/data:/var/lib/mysql
+      - mysql_for_rails6-data:/var/lib/mysql
+    # - ./db/data:/var/lib/mysql
     ports:
-    - 3306:3306
+      - 3306:3306
 
   rails6:
     build:
@@ -20,3 +21,7 @@ services:
       - '3000:3000'
     depends_on:
       - mysql_for_rails6
+
+volumes:
+  mysql_for_rails6-data:
+    driver: local

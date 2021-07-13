@@ -3,52 +3,41 @@ class User < ActiveRecord::Base
   def run_thread
     threads = []
 
-    puts "User.count before thread: #{User.count}"
-
     threads.push(thread_1)
     threads.push(thread_2)
-    threads.each { |t| t.value }
 
-    puts "User.count after thread: #{User.count}"
+    threads.each { |t| t.value }
   end
 
   def thread_1
     Thread.new do
-      # if User.count.positive?
-      #   puts "User.count in thread_1: #{User.count}"
-      #   puts "User.last.inspect in thread_1: #{User.last.inspect}"
-      # else
-      #   puts 'No user in thread_1'
-      # end
-      show_user_records('thread_1')
+      ActiveRecord::Base.transaction do
+        log('Thread1 started insert record.')
+        for num in 1..10 do
+          new_user = User.new
+          new_user.name = 'hoge'
+          new_user.email = 'hoge@example.com'
+          new_user.save!
+          log('Thread1 inserted record')
+        end
+        log('Thread1 finished insert record')
+      end
     end
-    # Thread.new do
-      # ActiveRecord::Base.transaction do
-      #   puts 'Thread1 started update record'
-      #   puts 'Thread1 finished update record'
-
-      #   puts 'Thread1 started insert record'
-      #   for num in 1..2 do
-      #     new_user = User.new
-      #     new_user.name = 'hoge'
-      #     new_user.email = 'hoge@example.com'
-      #     new_user.save!
-      #     puts 'Thread1 inserted record'
-      #   end
-      # end
-      # puts 'Thread1 commit'
-    # end
   end
 
   def thread_2
     Thread.new do
-      show_user_records('thread_2')
-      # if User.count.positive?
-      #   puts "User.count in thread_2: #{User.count}"
-      #   puts "User.last.inspect in thread_2: #{User.last.inspect}"
-      # else
-      #   puts 'No user in thread_2'
-      # end
+      ActiveRecord::Base.transaction do
+        log('Thread2 started insert record.')
+        for num in 1..10 do
+          new_user = User.new
+          new_user.name = 'hoge'
+          new_user.email = 'hoge@example.com'
+          new_user.save!
+          log('Thread2 inserted record')
+        end
+        log('Thread2 finished insert record')
+      end
     end
   end
 
