@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe '#run_thread' do
     before do
-      create_list(:user, 10)
+      create(:user, name: 'TestUser', email: 'test_user@example.com')
     end
 
     it 'レコード確認' do

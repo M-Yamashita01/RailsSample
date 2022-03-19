@@ -1,16 +1,38 @@
 class User < ActiveRecord::Base
 
+  def sample_method
+    sample_hoge = Sample::Hoge.new
+
+    # outer comment
+    do_a
+
+    if !condition
+      # comment
+      do_a
+    else
+      do_c
+    end
+  end
+
   def run_thread
     threads = []
 
-    threads.push(thread_1)
-    threads.push(thread_2)
+    puts "User.count before thread: #{User.count}"
+
+    threads.push(thread1)
+    threads.push(thread2)
+    threads.each { |t| t.value }
 
     threads.each { |t| t.value }
   end
 
-  def thread_1
+  def is_true?
+    true
+  end
+
+  def thread1
     Thread.new do
+<<<<<<< HEAD
       ActiveRecord::Base.transaction do
         log('Thread1 started insert record.')
         for num in 1..10 do
@@ -22,11 +44,15 @@ class User < ActiveRecord::Base
         end
         log('Thread1 finished insert record')
       end
+=======
+      show_user_records('thread_1')
+>>>>>>> ee265284b2e273c53d41c1c9d54914933529e813
     end
   end
 
-  def thread_2
+  def thread2
     Thread.new do
+<<<<<<< HEAD
       ActiveRecord::Base.transaction do
         log('Thread2 started insert record.')
         for num in 1..10 do
@@ -38,6 +64,9 @@ class User < ActiveRecord::Base
         end
         log('Thread2 finished insert record')
       end
+=======
+      show_user_records('thread_2')
+>>>>>>> ee265284b2e273c53d41c1c9d54914933529e813
     end
   end
 

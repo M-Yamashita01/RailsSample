@@ -1,0 +1,10 @@
+AllCops:
+  TargetRubyVersion: 2.7
+  Exclude:
+    - '**/tmp/**/*'
+    - '**/templates/**/*'
+    - '**/vendor/**/*'
+    - '**/node_modules/**/*'
+
+Style/NegatedIfElseCondition:
+  Enabled: true
