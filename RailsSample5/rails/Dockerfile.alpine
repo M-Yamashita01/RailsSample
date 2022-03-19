@@ -6,13 +6,15 @@ RUN apk update && \
                        curl \
                        mysql-dev \
                        nodejs \
-                       tzdata
+                       tzdata \
+                       libffi-dev
 
 WORKDIR /app
 
 COPY ./Gemfile* ./
 
-RUN gem install bundler && bundle install
+RUN gem install bundler && bundle config set path 'vendor/bundle' && bundle install
+# RUN gem install bundler && bundle install
 
 COPY . ./
 

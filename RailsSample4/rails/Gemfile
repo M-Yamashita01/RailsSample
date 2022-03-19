@@ -43,6 +43,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rubocop'
   gem 'spring-commands-rspec'
+  gem 'debug', ">= 1.0.0"
 end
 
 group :development do

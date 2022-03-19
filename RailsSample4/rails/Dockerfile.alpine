@@ -1,4 +1,4 @@
-FROM ruby:2.5.9-alpine3.13
+FROM ruby:2.6-alpine3.15
 
 RUN apk update && \
     apk --no-cache add bash \
@@ -12,7 +12,7 @@ WORKDIR /app
 
 COPY ./Gemfile* ./
 
-RUN gem install bundler:1.7.13 && export MAKE="make --jobs 4" && bundle install
+RUN gem install bundler && export MAKE="make --jobs 4" && bundle install
 # RUN gem install bundler:1.7.13 && bundle install
 
 COPY . ./
