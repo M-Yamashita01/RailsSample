@@ -15,6 +15,5 @@ jobs:
     - name: Verify MySQL connection from host
       run: |
         echo "${{ toJson(job) }}"
-        sudo apt-get install -y mysql-client
         mysql --host 127.0.0.1 --port ${{ job.services.mysql.ports['3306'] }} -uroot -ppassword -e "SHOW DATABASES"
         docker logs "${{ job.services.mysql.id }}"
